@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from './hooks/useAuth'
+import AuthComponent from './components/Auth'
+import Dashboard from './components/Dashboard'
+import AuthCallback from './components/AuthCallback'
+import ThemeToggle from './components/ThemeToggle'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { session, loading } = useAuth()
+
+  if (loading) {
+    return (
+      <div className="app">
+        <div className="loading">
+          <p>Loading...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <div className="header">
+        <h1>TheReminder</h1>
+        <ThemeToggle />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <Routes>
+        <Route path="/login" element={session ? <Navigate to="/dashboard" /> : <AuthComponent />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route
+          path="/dashboard"
+          element={session ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/"
+          element={session ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
+        />
+      </Routes>
+    </div>
   )
 }
 
