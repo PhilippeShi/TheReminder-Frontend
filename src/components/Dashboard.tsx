@@ -82,11 +82,6 @@ export default function Dashboard() {
     }))
   }
 
-  const convertTimeToHHMM = (timeString: string): string => {
-    const [hours, minutes] = timeString.split(':')
-    return `${hours.padStart(2, '0')}${minutes.padStart(2, '0')}`
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
