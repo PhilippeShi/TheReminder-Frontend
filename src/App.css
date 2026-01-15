@@ -98,6 +98,8 @@
   font-size: 0.9rem;
   color: var(--text-color);
   opacity: 0.8;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .loading {
@@ -110,5 +112,110 @@
   padding: 2rem;
   color: var(--text-color);
   opacity: 0.7;
+}
+
+.reminder-form {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.form-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.date-picker-input {
+  width: 100%;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.date-picker-input:focus {
+  outline: 2px solid var(--button-bg);
+  outline-offset: 2px;
+}
+
+/* React DatePicker calendar styling */
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.react-datepicker__header {
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+}
+
+.react-datepicker__current-month {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.react-datepicker__day-name {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.react-datepicker__day {
+  color: var(--text-color);
+}
+
+.react-datepicker__day:hover {
+  background-color: var(--hover-bg);
+}
+
+.react-datepicker__day--selected {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: var(--button-hover);
+}
+
+.react-datepicker__day--disabled {
+  color: var(--text-color);
+  opacity: 0.3;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--text-color);
+}
+
+.react-datepicker__triangle {
+  border-bottom-color: var(--card-bg) !important;
+}
+
+.react-datepicker__triangle::before {
+  border-bottom-color: var(--border-color) !important;
 }
 
