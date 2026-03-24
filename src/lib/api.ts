@@ -31,13 +31,25 @@ export async function authenticatedFetch(
 }
 
 /**
- * Helper function to handle API responses
+ * Helper function to handle API responses (reads body once; supports empty success bodies)
  */
 export async function handleApiResponse<T>(response: Response): Promise<T> {
+  const text = await response.text()
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Unknown error' }))
-    throw new Error(error.error_message || error.error || 'API request failed')
+    let message = 'API request failed'
+    if (text.trim()) {
+      try {
+        const error = JSON.parse(text) as { error_message?: string; error?: string }
+        message = error.error_message || error.error || message
+      } catch {
+        message = text
+      }
+    }
+    throw new Error(message)
   }
-  return response.json()
+  if (!text.trim()) {
+    return undefined as T
+  }
+  return JSON.parse(text) as T
 }
 
